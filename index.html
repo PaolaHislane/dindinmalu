@@ -4,8 +4,424 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dindin Gourmet da Malú - Cardápio Completo</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --rosa-claro: #FFD6E7;
+            --rosa-medio: #FF85B3;
+            --rosa-escuro: #E75480;
+            --marrom-claro: #D2B48C;
+            --marrom-escuro: #8B4513;
+            --branco: #FFFFFF;
+            --preto: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--rosa-claro);
+            color: var(--preto);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--rosa-escuro);
+            color: var(--branco);
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 20px;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--marrom-claro);
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .slogan {
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--marrom-claro);
+        }
+
+        .social-links {
+            margin-right: 20px;
+        }
+
+        .social-links a {
+            color: var(--branco);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--marrom-claro);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .menu-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            background-color: var(--rosa-medio);
+            color: var(--branco);
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-item {
+            background-color: var(--branco);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .item-details {
+            padding: 15px;
+        }
+
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--marrom-escuro);
+        }
+
+        .item-description {
+            color: var(--preto);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: var(--rosa-escuro);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background-color: var(--marrom-claro);
+            color: var(--branco);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--marrom-escuro);
+        }
+
+        .cart-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .cart-button {
+            background-color: var(--rosa-escuro);
+            color: var(--branco);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--marrom-escuro);
+            color: var(--branco);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .cart-dropdown {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 300px;
+            background-color: var(--branco);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            display: none;
+            text-align: center;
+        }
+
+        .cart-dropdown.active {
+            display: block;
+        }
+
+        .cart-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--marrom-escuro);
+            text-align: center;
+        }
+
+        .cart-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--rosa-claro);
+            width: 100%;
+        }
+
+        .cart-item-name, .cart-item-price {
+            text-align: center;
+            flex: 1;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--marrom-escuro);
+            width: 100%;
+        }
+
+        .checkout-button {
+            background-color: var(--rosa-escuro);
+            color: var(--branco);
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-button:hover {
+            background-color: var(--marrom-escuro);
+        }
+
+        footer {
+            background-color: var(--rosa-escuro);
+            color: var(--branco);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .footer-logo {
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .logo-img {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--marrom-claro);
+        }
+
+        .footer-text {
+            margin-bottom: 10px;
+        }
+
+        .footer-text a {
+            color: var(--marrom-claro);
+            text-decoration: none;
+        }
+
+        /* Botão do WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .whatsapp-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            font-size: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-link:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Mensagem de sucesso */
+        .success-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .success-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .success-content h3 {
+            color: var(--rosa-escuro);
+            margin-bottom: 10px;
+        }
+
+        .success-content p {
+            margin-bottom: 20px;
+        }
+
+        .close-message {
+            background-color: var(--rosa-escuro);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px 0;
+            }
+
+            .logo-container {
+                flex-direction: column;
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+
+            .logo-img {
+                margin-bottom: 10px;
+            }
+
+            .social-links {
+                margin: 10px 0 0;
+            }
+
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-dropdown {
+                width: 280px;
+                right: -50px;
+            }
+
+            .whatsapp-float {
+                bottom: 80px;
+                left: 15px;
+            }
+            
+            .cart-container {
+                bottom: 80px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -46,7 +462,7 @@
                         <h3 class="item-name">Coco</h3>
                         <p class="item-description">Creme de coco fresco com raspas tostadas.</p>
                         <p class="item-price">R$ 5,00</p>
-                        <button class="add-to-cart" data-name="Coco" data-price="5.0">Adicionar</button>
+                        <button class="add-to-cart" data-name="Coco" data-price="5.00">Adicionar</button>
                     </div>
                 </div>
 
@@ -223,15 +639,151 @@
         </div>
         <p class="footer-text">Dindin Gourmet da Malú - Doces feitos com amor!</p>
         <p class="footer-text">Entre em contato: (61) 99196-5570</p>
-        <p class="footer-text">Siga-nos no <a href="https://www.instagram.com/dindinmalu/" target="_blank">Instagram</a></p>
+        <p class="footer-text">Siga-nos no <a href="https://instagram.com/dindingourmetdamalu" target="_blank">Instagram</a></p>
     </footer>
 
-    <script src="script.js"></script>
     <!-- Botão do WhatsApp fixo -->
-<div class="whatsapp-float">
-    <a href="https://wa.me/5561991965570" target="_blank" class="whatsapp-link">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-</div>
+    <div class="whatsapp-float">
+        <a href="https://wa.me/5561991965570" target="_blank" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartButton = document.querySelector('.cart-button');
+            const cartDropdown = document.querySelector('.cart-dropdown');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const cartTotal = document.querySelector('.cart-total');
+            const cartCount = document.querySelector('.cart-count');
+            const checkoutButton = document.querySelector('.checkout-button');
+
+            let cart = [];
+
+            // Mostrar/ocultar carrinho
+            cartButton.addEventListener('click', function() {
+                cartDropdown.classList.toggle('active');
+            });
+
+            // Adicionar item ao carrinho
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const name = this.getAttribute('data-name');
+                    const price = parseFloat(this.getAttribute('data-price'));
+                    
+                    const existingItem = cart.find(item => item.name === name);
+                    
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            name: name,
+                            price: price,
+                            quantity: 1
+                        });
+                    }
+                    
+                    updateCart();
+                    cartDropdown.classList.add('active');
+                });
+            });
+
+            // Atualizar carrinho
+            function updateCart() {
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+                let count = 0;
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    count += item.quantity;
+                    
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.classList.add('cart-item');
+                    cartItemElement.innerHTML = `
+                        <div class="cart-item-name">${item.name} (${item.quantity})</div>
+                        <div class="cart-item-price">R$ ${itemTotal.toFixed(2)}</div>
+                    `;
+                    cartItemsContainer.appendChild(cartItemElement);
+                });
+                
+                cartTotal.textContent = `Total: R$ ${total.toFixed(2)}`;
+                cartCount.textContent = count;
+            }
+
+            // Finalizar pedido via WhatsApp
+            checkoutButton.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Seu carrinho está vazio!');
+                    return;
+                }
+                
+                let message = 'Olá, gostaria de fazer um pedido:\n\n';
+                
+                cart.forEach(item => {
+                    message += `${item.name} - Quantidade: ${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
+                });
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                message += `\nTotal: R$ ${total.toFixed(2)}`;
+                
+                const whatsappUrl = `https://wa.me/5561991965570?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+                
+                // Limpar carrinho
+                cart = [];
+                updateCart();
+                cartDropdown.classList.remove('active');
+                
+                // Mostrar mensagem de sucesso
+                showSuccessMessage();
+            });
+
+            // Mostrar mensagem de sucesso
+            function showSuccessMessage() {
+                const message = document.createElement('div');
+                message.className = 'success-message';
+                message.innerHTML = `
+                    <div class="success-content">
+                        <h3>Pedido Enviado!</h3>
+                        <p>Seu pedido foi enviado com sucesso pelo WhatsApp.</p>
+                        <button class="close-message">OK</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(message);
+                
+                const closeBtn = document.querySelector('.close-message');
+                closeBtn.addEventListener('click', function() {
+                    document.body.removeChild(message);
+                });
+            }
+
+            // Configuração do botão do WhatsApp
+            function setupWhatsAppButton() {
+                const whatsappBtn = document.querySelector('.whatsapp-link');
+                
+                whatsappBtn.addEventListener('click', function(e) {
+                    // Se houver itens no carrinho, sugere enviar o pedido
+                    if (cart.length > 0) {
+                        e.preventDefault();
+                        const confirmSend = confirm('Você tem itens no carrinho. Deseja enviar o pedido agora?');
+                        
+                        if (confirmSend) {
+                            checkoutButton.click(); // Dispara o processo de checkout
+                        } else {
+                            window.open(this.href, '_blank'); // Abre o WhatsApp normal
+                        }
+                    }
+                    // Se não houver itens, abre o WhatsApp normalmente
+                });
+            }
+
+            // Inicializar botão do WhatsApp
+            setupWhatsAppButton();
+        });
+    </script>
 </body>
 </html>
