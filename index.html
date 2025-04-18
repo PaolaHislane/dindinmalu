@@ -300,6 +300,11 @@
         .footer-text a {
             color: var(--marrom-claro);
             text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-text a:hover {
+            color: var(--branco);
         }
 
         /* Botão do WhatsApp */
@@ -393,10 +398,21 @@
                 flex-direction: column;
                 margin-left: 0;
                 margin-bottom: 10px;
+                gap: 10px;
             }
 
             .logo-img {
                 margin-bottom: 10px;
+                width: 70px;
+                height: 70px;
+            }
+
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .slogan {
+                font-size: 0.9rem;
             }
 
             .social-links {
@@ -405,6 +421,12 @@
 
             .menu-items {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+                padding: 8px 10px;
             }
 
             .cart-dropdown {
@@ -413,12 +435,75 @@
             }
 
             .whatsapp-float {
-                bottom: 80px;
+                bottom: 90px;
                 left: 15px;
             }
             
             .cart-container {
+                bottom: 90px;
+            }
+
+            footer {
+                padding: 15px 10px;
+            }
+
+            .footer-logo .logo-img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .footer-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+
+            .slogan {
+                font-size: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .item-name {
+                font-size: 1.1rem;
+            }
+
+            .item-price {
+                font-size: 1rem;
+            }
+
+            .cart-dropdown {
+                width: 250px;
+                right: -30px;
+            }
+
+            .whatsapp-float {
                 bottom: 80px;
+                left: 10px;
+            }
+
+            .whatsapp-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .cart-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .cart-count {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -433,7 +518,7 @@
             </div>
         </div>
         <div class="social-links">
-            <a href="https://instagram.com/dindingourmetdamalu" target="_blank" title="Instagram">
+            <a href="https://instagram.com/dindinmalu" target="_blank" title="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
         </div>
